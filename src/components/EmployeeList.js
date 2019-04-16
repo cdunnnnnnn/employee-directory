@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
-import Button from '@material-ui/core/Button'
 
 class EmployeeList extends Component {
   render() {
     const { removeEmployee, employees } = this.props
 
     return (
-      <div className="employee">
-        <h2>Name</h2>
+      <div>
+        {Object.keys(employees).map(employeeID => (
+          <div className="employee" key={employeeID}>
+            {employees[employeeID]}
+            <button
+              aria-label="Delete"
+              onClick={() => removeEmployee(employeeID)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
       </div>
     )
   }

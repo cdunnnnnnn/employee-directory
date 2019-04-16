@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import EmployeeList from './EmployeeList'
+import EmployeeForm from './EmployeeForm'
 import uuidv4 from 'uuid/v4'
 
 class Directory extends Component {
   constructor(props) {
     super(props)
-    this.state = { employees: {} }
+    this.state = {
+      employees: {
+        148390: 'Bob Diggler',
+        682745: 'Joey Tooshews',
+        593847: 'Sammy Stankwich'
+      }
+    }
   }
 
   createEmployee = async employeeContent => {
@@ -14,8 +21,8 @@ class Directory extends Component {
     this.setState({
       employees: {
         ...this.state.employees,
-        [uniqueID]: employeeContent,
-      },
+        [uniqueID]: employeeContent
+      }
     })
   }
 
@@ -30,7 +37,11 @@ class Directory extends Component {
       <div className="directory">
         <h1>Emplyee Directory</h1>
         <div className="employees">
-          <EmployeeList />
+          <EmployeeList
+            employees={this.state.employees}
+            removeEmployee={this.removeEmployee}
+          />
+          <EmployeeForm createEmployee={this.createEmployee} />
         </div>
       </div>
     )

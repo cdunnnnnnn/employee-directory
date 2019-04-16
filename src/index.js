@@ -1,5 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Directory from "./components/Directory";
+import '@babel/polyfill'
 
-ReactDOM.render(<Directory />, document.getElementById("root"));
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import Directory from './components/Directory'
+
+import './styles.css'
+
+ReactDOM.render(<Directory />, document.getElementById('root'))

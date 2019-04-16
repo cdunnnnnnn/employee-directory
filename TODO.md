@@ -1,0 +1,5 @@
+- CRUD app for employee directory
+- ~~use webpack and babel~~
+- ~~use tailwindCSS~~
+- deployment
+- write tests
