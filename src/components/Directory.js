@@ -146,7 +146,7 @@ class Directory extends Component {
               <br />
             </div>
           ) : (
-            <form className="mx-auto max-w-sm mt-12 mb-12">
+            <form className="mx-auto max-w-sm mt-12 mb-12 pl-2 pr-2">
               <div className="md:flex md:items-center mb-6">
                 <div className="md:w-1/3">
                   <label
@@ -250,12 +250,14 @@ class Directory extends Component {
             </form>
           )}
         </div>
-        <EmployeeItems
-          entries={this.state.items}
-          getSingleItem={this.getSingleItem}
-          editItem={this.editItem}
-          deleteItem={this.deleteItem}
-        />
+        <div className="pl-2 pr-2">
+          <EmployeeItems
+            entries={this.state.items}
+            getSingleItem={this.getSingleItem}
+            editItem={this.editItem}
+            deleteItem={this.deleteItem}
+          />
+        </div>
       </div>
     )
   }

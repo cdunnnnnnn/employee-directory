@@ -10,7 +10,7 @@ class Nav extends Component {
           </span>
         </div>
         <div className="block lg:hidden">
-          <button className="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
+          <button className="flex items-center px-3 py-2 border rounded text-indigo-lighter border-indigo-light hover:text-white hover:border-white">
             <svg
               className="fill-current h-3 w-3"
               viewBox="0 0 20 20"
