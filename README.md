@@ -12,3 +12,7 @@
 ## Production
 
 - Run `yarn build` to generate production ready files in `/dist`
+
+## Serverless API
+
+- Run `serverless deploy` for deploying to api

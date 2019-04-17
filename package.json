@@ -8,10 +8,14 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "mongoose": "^5.5.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
-    "uuid": "^3.3.2"
+    "serverless-http": "^1.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",

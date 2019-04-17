@@ -1,48 +1,135 @@
 import React, { Component } from 'react'
-import EmployeeList from './EmployeeList'
-import EmployeeForm from './EmployeeForm'
-import uuidv4 from 'uuid/v4'
+import EmployeeItems from './EmployeeItems'
 
 class Directory extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      employees: {
-        148390: 'Bob Diggler',
-        682745: 'Joey Tooshews',
-        593847: 'Sammy Stankwich'
-      }
+      items: [],
+      currentItem: { name: '' }
     }
   }
 
-  createEmployee = async employeeContent => {
-    const uniqueID = uuidv4()
+  componentDidMount = async () => {
+    const response = await fetch(
+      'https://v61fbagrwl.execute-api.us-east-1.amazonaws.com/dev/api/employees',
+      {
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+          'User-Agent': 'employee'
+        },
+        method: 'GET'
+      }
+    )
+    const json = await response.json()
+
+    this.setState({ items: json })
+  }
+
+  handleInput = event => {
+    const itemText = event.target.value
+    const currentItem = { name: itemText }
 
     this.setState({
-      employees: {
-        ...this.state.employees,
-        [uniqueID]: employeeContent
-      }
+      currentItem
     })
   }
 
-  removeEmployee = async employeeID => {
-    const employees = { ...this.state.employees }
-    delete employees[employeeID]
-    this.setState({ employees })
+  addItem = async event => {
+    event.preventDefault()
+
+    const newItem = this.state.currentItem
+    if (newItem.name !== '') {
+      const response = await fetch(
+        'https://v61fbagrwl.execute-api.us-east-1.amazonaws.com/dev/api/employees',
+        {
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            'User-Agent': 'employee'
+          },
+          body: JSON.stringify({ name: newItem.name }),
+          method: 'POST'
+        }
+      )
+      const json = await response.json()
+      const items = this.state.items
+
+      items.unshift(json)
+      this.setState({ items: items })
+      this.inputElement.value = ''
+    }
+  }
+
+  editItem = async (name, id) => {
+    const response = await fetch(
+      `https://v61fbagrwl.execute-api.us-east-1.amazonaws.com/dev/api/employees/${id}`,
+      {
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+          'User-Agent': 'employee'
+        },
+        body: JSON.stringify({ name: name }),
+        method: 'PUT'
+      }
+    )
+
+    const json = await response.json()
+    this.state.items.forEach(item => {
+      if (item._id === json._id) {
+        item.name = json.name
+      }
+    })
+
+    this.setState({ items: this.state.items })
+  }
+
+  deleteItem = async id => {
+    const filteredItems = this.state.items.filter(item => {
+      return item._id !== id
+    })
+
+    const response = await fetch(
+      `https://v61fbagrwl.execute-api.us-east-1.amazonaws.com/dev/api/employees/${id}`,
+      {
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+          'User-Agent': 'employee'
+        },
+        method: 'DELETE'
+      }
+    )
+
+    const json = await response.json()
+    if (json.deletedCount === 1) {
+      this.setState({ items: filteredItems })
+    }
   }
 
   render() {
     return (
-      <div className="directory">
-        <h1>Emplyee Directory</h1>
-        <div className="employees">
-          <EmployeeList
-            employees={this.state.employees}
-            removeEmployee={this.removeEmployee}
-          />
-          <EmployeeForm createEmployee={this.createEmployee} />
+      <div>
+        <div>
+          <div>
+            <input
+              placeholder="Add Employee"
+              ref={c => {
+                this.inputElement = c
+              }}
+              value={this.state.currentItem.text}
+              onChange={this.handleInput}
+            />
+            <button onClick={this.addItem}>Add Employee</button>
+          </div>
         </div>
+        <EmployeeItems
+          entries={this.state.items}
+          editItem={this.editItem}
+          deleteItem={this.deleteItem}
+        />
       </div>
     )
   }
