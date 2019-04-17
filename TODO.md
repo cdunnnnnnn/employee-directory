@@ -5,6 +5,10 @@
 - ~~deployment~~
 - ~~style components~~
 - add search
+- fix update name
+- add 404
+- make form a modal
+- add directory card styles
 - paginated lists
 - animations
 - Third-party APIs

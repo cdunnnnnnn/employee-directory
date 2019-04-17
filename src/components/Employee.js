@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Employee extends Component {
   constructor() {
@@ -53,15 +54,24 @@ class Employee extends Component {
         key={item._id}
       >
         <div className="sm:flex sm:items-center px-6 py-4">
-          <img
-            className="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
-            src={item.image}
-            alt={item.name}
-          />
+          <Link to={`/employee/${item._id}/${item.name}`}>
+            <img
+              className="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
+              src={item.image}
+              alt={item.name}
+            />
+          </Link>
           {!this.state.editMode ? (
             <div>
               <div className="mb-4">
-                <p className="text-xl leading-tight">{item.name}</p>
+                <p className="text-xl leading-tight">
+                  <Link
+                    className="text-grey-darkest no-underline"
+                    to={`/employee/${item._id}/${item.name}`}
+                  >
+                    {item.name}
+                  </Link>
+                </p>
                 <p className="text-sm leading-tight text-grey-dark">
                   {item.job_title}
                 </p>

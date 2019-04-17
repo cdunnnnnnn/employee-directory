@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Nav extends Component {
   render() {
@@ -6,7 +7,9 @@ class Nav extends Component {
       <nav className="flex items-center justify-between flex-wrap bg-indigo-darkest p-6">
         <div className="flex items-center flex-no-shrink text-white mr-6">
           <span className="font-semibold text-xl tracking-tight">
-            Employee Directory
+            <Link className="text-white no-underline" to="/">
+              Employee Directory
+            </Link>
           </span>
         </div>
         <div className="block lg:hidden">

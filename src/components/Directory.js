@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Nav from './Nav'
+import Form from './Form'
 import EmployeeItems from './EmployeeItems'
 
 class Directory extends Component {
@@ -9,9 +10,13 @@ class Directory extends Component {
       newMode: false,
       items: [],
       name: '',
+      email: '',
       job_title: '',
+      company: '',
       department: '',
-      image: ''
+      location: '',
+      image: '',
+      bio: ''
     }
   }
 
@@ -47,9 +52,13 @@ class Directory extends Component {
 
     const newItem = {
       name: this.state.name,
+      email: this.state.email,
       job_title: this.state.job_title,
+      company: this.state.company,
       department: this.state.department,
-      image: this.state.image
+      location: this.state.location,
+      image: this.state.image,
+      bio: this.state.bio
     }
 
     if (newItem.name !== '') {
@@ -63,9 +72,13 @@ class Directory extends Component {
           },
           body: JSON.stringify({
             name: newItem.name,
+            email: newItem.email,
             job_title: newItem.job_title,
+            company: newItem.company,
             department: newItem.department,
-            image: newItem.image
+            location: newItem.location,
+            image: newItem.image,
+            bio: newItem.bio
           }),
           method: 'POST'
         }
@@ -146,108 +159,12 @@ class Directory extends Component {
               <br />
             </div>
           ) : (
-            <form className="mx-auto max-w-sm mt-12 mb-12 pl-2 pr-2">
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="name"
-                  >
-                    Full Name
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
-                    name="name"
-                    placeholder="Jane Doe"
-                    ref={el => {
-                      this.inputElement = el
-                    }}
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="job_title"
-                  >
-                    Job Title
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
-                    name="job_title"
-                    placeholder="Accountant"
-                    ref={el => {
-                      this.inputElement = el
-                    }}
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="department"
-                  >
-                    Department
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
-                    name="department"
-                    placeholder="Accounting"
-                    ref={el => {
-                      this.inputElement = el
-                    }}
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="image"
-                  >
-                    Image URL
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
-                    name="image"
-                    placeholder="http://placekitten.com/400/400"
-                    ref={el => {
-                      this.inputElement = el
-                    }}
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center">
-                <div className="md:w-1/3" />
-                <div className="md:w-2/3">
-                  <button
-                    className="shadow bg-purple hover:bg-purple-light focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                    type="button"
-                    onClick={this.addItem}
-                  >
-                    Add Employee
-                  </button>
-                </div>
-              </div>
-            </form>
+            <Form
+              text={this.state.text}
+              onChange={this.handleChange}
+              addItem={this.addItem}
+              toggleNew={this.toggleNew}
+            />
           )}
         </div>
         <div className="pl-2 pr-2">
