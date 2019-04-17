@@ -22,7 +22,7 @@ class EmployeeItems extends Component {
       )
     })
 
-    return <ul>{listitems}</ul>
+    return <div>{listitems}</div>
   }
 }
 

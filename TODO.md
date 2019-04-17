@@ -3,7 +3,7 @@
 - ~~use tailwindCSS~~
 - ~~setup API~~
 - ~~deployment~~
-- style components
+- ~~style components~~
 - add search
 - paginated lists
 - animations

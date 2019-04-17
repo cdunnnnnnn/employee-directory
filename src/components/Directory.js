@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import Nav from './Nav'
 import EmployeeItems from './EmployeeItems'
 
 class Directory extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      newMode: false,
       items: [],
       name: '',
       job_title: '',
@@ -72,8 +74,10 @@ class Directory extends Component {
       const items = this.state.items
 
       items.unshift(json)
-      this.setState({ items: items })
-      this.inputElement.value = ''
+      this.setState({
+        newMode: false,
+        items: items
+      })
     }
   }
 
@@ -87,10 +91,7 @@ class Directory extends Component {
           'User-Agent': 'employee'
         },
         body: JSON.stringify({
-          name: newItem.name,
-          job_title: newItem.job_title,
-          department: newItem.department,
-          image: newItem.image
+          name: name
         }),
         method: 'PUT'
       }
@@ -129,49 +130,125 @@ class Directory extends Component {
     }
   }
 
+  toggleNew = event => {
+    event.preventDefault()
+
+    this.setState({ newMode: !this.state.newMode })
+  }
+
   render() {
     return (
       <div>
+        <Nav toggleNew={this.toggleNew} newMode={this.newMode} />
         <div>
-          <form>
-            <input
-              name="name"
-              placeholder="Full Name"
-              ref={el => {
-                this.inputElement = el
-              }}
-              value={this.state.text}
-              onChange={this.handleChange}
-            />
-            <input
-              name="job_title"
-              placeholder="Job Title"
-              ref={el => {
-                this.inputElement = el
-              }}
-              value={this.state.text}
-              onChange={this.handleChange}
-            />
-            <input
-              name="department"
-              placeholder="Department"
-              ref={el => {
-                this.inputElement = el
-              }}
-              value={this.state.text}
-              onChange={this.handleChange}
-            />
-            <input
-              name="image"
-              placeholder="Image URL"
-              ref={el => {
-                this.inputElement = el
-              }}
-              value={this.state.text}
-              onChange={this.handleChange}
-            />
-            <button onClick={this.addItem}>Add Employee</button>
-          </form>
+          {!this.state.newMode ? (
+            <div>
+              <br />
+            </div>
+          ) : (
+            <form className="mx-auto max-w-sm mt-12 mb-12">
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label
+                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    htmlFor="name"
+                  >
+                    Full Name
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <input
+                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
+                    name="name"
+                    placeholder="Jane Doe"
+                    ref={el => {
+                      this.inputElement = el
+                    }}
+                    value={this.state.text}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label
+                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    htmlFor="job_title"
+                  >
+                    Job Title
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <input
+                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
+                    name="job_title"
+                    placeholder="Accountant"
+                    ref={el => {
+                      this.inputElement = el
+                    }}
+                    value={this.state.text}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label
+                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    htmlFor="department"
+                  >
+                    Department
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <input
+                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
+                    name="department"
+                    placeholder="Accounting"
+                    ref={el => {
+                      this.inputElement = el
+                    }}
+                    value={this.state.text}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label
+                    className="block text-grey font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    htmlFor="image"
+                  >
+                    Image URL
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <input
+                    className="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
+                    name="image"
+                    placeholder="http://placekitten.com/400/400"
+                    ref={el => {
+                      this.inputElement = el
+                    }}
+                    value={this.state.text}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="md:flex md:items-center">
+                <div className="md:w-1/3" />
+                <div className="md:w-2/3">
+                  <button
+                    className="shadow bg-purple hover:bg-purple-light focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                    type="button"
+                    onClick={this.addItem}
+                  >
+                    Add Employee
+                  </button>
+                </div>
+              </div>
+            </form>
+          )}
         </div>
         <EmployeeItems
           entries={this.state.items}
