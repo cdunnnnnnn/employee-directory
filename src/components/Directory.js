@@ -6,7 +6,10 @@ class Directory extends Component {
     super(props)
     this.state = {
       items: [],
-      currentItem: { name: '' }
+      name: '',
+      job_title: '',
+      department: '',
+      image: ''
     }
   }
 
@@ -27,19 +30,26 @@ class Directory extends Component {
     this.setState({ items: json })
   }
 
-  handleInput = event => {
-    const itemText = event.target.value
-    const currentItem = { name: itemText }
+  handleChange = event => {
+    const target = event.target
+    const value = target.value
+    const name = target.name
 
     this.setState({
-      currentItem
+      [name]: value
     })
   }
 
   addItem = async event => {
     event.preventDefault()
 
-    const newItem = this.state.currentItem
+    const newItem = {
+      name: this.state.name,
+      job_title: this.state.job_title,
+      department: this.state.department,
+      image: this.state.image
+    }
+
     if (newItem.name !== '') {
       const response = await fetch(
         'https://v61fbagrwl.execute-api.us-east-1.amazonaws.com/dev/api/employees',
@@ -49,7 +59,12 @@ class Directory extends Component {
             'Content-Type': 'application/json',
             'User-Agent': 'employee'
           },
-          body: JSON.stringify({ name: newItem.name }),
+          body: JSON.stringify({
+            name: newItem.name,
+            job_title: newItem.job_title,
+            department: newItem.department,
+            image: newItem.image
+          }),
           method: 'POST'
         }
       )
@@ -71,7 +86,12 @@ class Directory extends Component {
           'Content-Type': 'application/json',
           'User-Agent': 'employee'
         },
-        body: JSON.stringify({ name: name }),
+        body: JSON.stringify({
+          name: newItem.name,
+          job_title: newItem.job_title,
+          department: newItem.department,
+          image: newItem.image
+        }),
         method: 'PUT'
       }
     )
@@ -113,20 +133,49 @@ class Directory extends Component {
     return (
       <div>
         <div>
-          <div>
+          <form>
             <input
-              placeholder="Add Employee"
-              ref={c => {
-                this.inputElement = c
+              name="name"
+              placeholder="Full Name"
+              ref={el => {
+                this.inputElement = el
               }}
-              value={this.state.currentItem.text}
-              onChange={this.handleInput}
+              value={this.state.text}
+              onChange={this.handleChange}
+            />
+            <input
+              name="job_title"
+              placeholder="Job Title"
+              ref={el => {
+                this.inputElement = el
+              }}
+              value={this.state.text}
+              onChange={this.handleChange}
+            />
+            <input
+              name="department"
+              placeholder="Department"
+              ref={el => {
+                this.inputElement = el
+              }}
+              value={this.state.text}
+              onChange={this.handleChange}
+            />
+            <input
+              name="image"
+              placeholder="Image URL"
+              ref={el => {
+                this.inputElement = el
+              }}
+              value={this.state.text}
+              onChange={this.handleChange}
             />
             <button onClick={this.addItem}>Add Employee</button>
-          </div>
+          </form>
         </div>
         <EmployeeItems
           entries={this.state.items}
+          getSingleItem={this.getSingleItem}
           editItem={this.editItem}
           deleteItem={this.deleteItem}
         />

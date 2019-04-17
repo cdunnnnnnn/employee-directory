@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
+import Employee from './Employee'
 
 class EmployeeItems extends Component {
+  constructor() {
+    super()
+    this.state = {
+      listItems: []
+    }
+  }
+
   render() {
-    return (
-      <div>
-        <h2>Employee</h2>
-      </div>
-    )
+    const employeeEntries = this.props.entries
+    const listitems = employeeEntries.map(item => {
+      return (
+        <Employee
+          key={item._id}
+          item={item}
+          editItem={this.props.editItem}
+          deleteItem={this.props.deleteItem}
+        />
+      )
+    })
+
+    return <ul>{listitems}</ul>
   }
 }
 
