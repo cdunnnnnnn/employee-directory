@@ -12,7 +12,7 @@
 ## Production
 
 - Run `yarn build` to generate react app production ready files in `/dist`
-- Run `deploy --prod` to deploy production to a [surge](https://surge.sh/) instance
+- Run `yarn run deploy` to deploy production to a [surge](https://surge.sh/) instance
 - Visit production site at [http://postlight.surge.sh/](http://postlight.surge.sh/)
 
 ## Serverless API
