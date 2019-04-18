@@ -1,3 +1,18 @@
+## About
+
+This is a Employee Directory app built with modern tooling including:
+
+- [React](https://reactjs.org/)
+- [Webpack](https://webpack.js.org/)
+- [Babel](https://babeljs.io/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [AWS Lambada](https://aws.amazon.com/lambda/)
+
+You can add new employees via the `[ Toggle Form ]` button on the homepage. You can update the names on the homepage cards via the `( Edit )` button. You can delete items on the homepage via the `( Delete )` button. Clicking on the item's avatar image or name will to you to their info page.
+
 ## Setup
 
 - Make sure you have [Node.js](https://nodejs.org/) installed
