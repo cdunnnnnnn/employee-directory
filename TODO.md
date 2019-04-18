@@ -7,10 +7,11 @@
 - ~~fix update name~~
 - ~~make form a modal~~
 - ~~add directory card styles~~
-- company, title, location, etc. filters
-- add 404
+- ~~add filters to directory~~
+- ~~add 404~~
 - add search and SERP
 - paginated lists
+- form validation
 - animations
 - Third-party APIs
 - write tests

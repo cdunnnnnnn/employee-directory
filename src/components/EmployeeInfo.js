@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Nav from './Nav'
 import Form from './Form'
+import Footer from './Footer'
 
 class EmployeeInfo extends Component {
   constructor() {
@@ -58,8 +59,13 @@ class EmployeeInfo extends Component {
     })
   }
 
+  resetFilters = event => {
+    this.setState({
+      filter: ''
+    })
+  }
+
   toggleForm = event => {
-    console.log(event)
     event.preventDefault()
 
     this.setState({ updateMode: !this.state.updateMode })
@@ -70,7 +76,11 @@ class EmployeeInfo extends Component {
 
     return (
       <div>
-        <Nav toggleForm={this.toggleForm} updateMode={this.state.updateMode} />
+        <Nav
+          toggleForm={this.toggleForm}
+          updateMode={this.state.updateMode}
+          resetFilters={this.resetFilters.bind(this)}
+        />
         <div>
           <br />
           {this.state.updateMode && (
@@ -154,6 +164,7 @@ class EmployeeInfo extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

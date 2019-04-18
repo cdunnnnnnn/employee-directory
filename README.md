@@ -11,7 +11,7 @@ This is a Employee Directory app built with modern tooling including:
 - [MongoDB](https://www.mongodb.com/)
 - [AWS Lambada](https://aws.amazon.com/lambda/)
 
-You can add new employees via the `[ Toggle Form ]` button on the homepage. You can update the names on the homepage cards via the `( Edit )` button. You can delete items on the homepage via the `( Delete )` button. Clicking on the item's avatar image or name will to you to their info page.
+You can add new employees via the `[+]` button on the homepage. You can update the names on the homepage cards via the `( Edit )` button. You can delete items on the homepage via the `( Delete )` button. Clicking on the item's avatar image or name will to you to their info page.
 
 ## Setup
 

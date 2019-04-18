@@ -11,16 +11,21 @@ class EmployeeItems extends Component {
 
   render() {
     const employeeEntries = this.props.entries
-    const listitems = employeeEntries.map(item => {
-      return (
-        <Employee
-          key={item._id}
-          item={item}
-          editItem={this.props.editItem}
-          deleteItem={this.props.deleteItem}
-        />
-      )
-    })
+    const filter = this.props.filter
+    const listitems = employeeEntries
+      .filter(item => {
+        return !filter || item.name == filter
+      })
+      .map(item => {
+        return (
+          <Employee
+            key={item._id}
+            item={item}
+            editItem={this.props.editItem}
+            deleteItem={this.props.deleteItem}
+          />
+        )
+      })
 
     return <div className="flex flex-wrap">{listitems}</div>
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import Form from './Form'
 import EmployeeItems from './EmployeeItems'
+import Footer from './Footer'
 
 class Directory extends Component {
   constructor(props) {
@@ -17,15 +18,13 @@ class Directory extends Component {
       location: '',
       image: '',
       bio: '',
-      filters: {
-        company: {},
-        location: {},
-        title: {}
-      }
+      filter: ''
     }
   }
 
   componentDidMount = async () => {
+    //const { location } = this.props
+
     const response = await fetch(
       'https://v61fbagrwl.execute-api.us-east-1.amazonaws.com/dev/api/employees',
       {
@@ -49,6 +48,19 @@ class Directory extends Component {
 
     this.setState({
       [name]: value
+    })
+  }
+
+  handleFilters = event => {
+    const value = event.target.value
+    this.setState({
+      filter: value
+    })
+  }
+
+  resetFilters = event => {
+    this.setState({
+      filter: ''
     })
   }
 
@@ -157,9 +169,24 @@ class Directory extends Component {
   }
 
   render() {
+    let nameOptions = this.state.items
+      .filter((item, index, self) => self.indexOf(item) == index)
+      .map(item => {
+        return item.name
+      })
+    nameOptions.unshift('')
+    new Set(nameOptions)
+
     return (
       <div>
-        <Nav toggleForm={this.toggleForm} newMode={this.state.newMode} />
+        <Nav
+          toggleForm={this.toggleForm}
+          newMode={this.state.newMode}
+          nameOptions={nameOptions}
+          filter={this.state.filter}
+          handleFilters={this.handleFilters.bind(this)}
+          resetFilters={this.resetFilters.bind(this)}
+        />
         <div>
           <br />
           {this.state.newMode && (
@@ -173,11 +200,13 @@ class Directory extends Component {
         <div className="pl-2 pr-2">
           <EmployeeItems
             entries={this.state.items}
+            filter={this.state.filter}
             getSingleItem={this.getSingleItem}
             editItem={this.editItem}
             deleteItem={this.deleteItem}
           />
         </div>
+        <Footer />
       </div>
     )
   }
