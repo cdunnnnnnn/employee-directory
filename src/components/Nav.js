@@ -29,7 +29,7 @@ class Nav extends Component {
           <div>
             <button
               className="inline-block text-sm px-4 py-2 leading-none border rounded text-indigo-lightest font-bold border-indigo-dark bg-indigo-dark hover:border-indigo-darker hover:bg-indigo-darker mt-4 lg:mt-0 no-underline"
-              onClick={this.props.toggleNew}
+              onClick={this.props.toggleForm}
             >
               Toggle Form
             </button>

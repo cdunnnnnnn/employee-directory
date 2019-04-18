@@ -22,7 +22,7 @@ class EmployeeItems extends Component {
       )
     })
 
-    return <div>{listitems}</div>
+    return <div className="flex flex-wrap">{listitems}</div>
   }
 }
 

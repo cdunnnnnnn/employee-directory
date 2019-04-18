@@ -4,11 +4,12 @@
 - ~~setup API~~
 - ~~deployment~~
 - ~~style components~~
-- add search
-- fix update name
+- ~~fix update name~~
+- ~~make form a modal~~
+- ~~add directory card styles~~
+- company, title, location, etc. filters
 - add 404
-- make form a modal
-- add directory card styles
+- add search and SERP
 - paginated lists
 - animations
 - Third-party APIs

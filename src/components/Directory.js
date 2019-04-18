@@ -16,7 +16,12 @@ class Directory extends Component {
       department: '',
       location: '',
       image: '',
-      bio: ''
+      bio: '',
+      filters: {
+        company: {},
+        location: {},
+        title: {}
+      }
     }
   }
 
@@ -91,6 +96,8 @@ class Directory extends Component {
         newMode: false,
         items: items
       })
+
+      return this.toggleForm()
     }
   }
 
@@ -143,7 +150,7 @@ class Directory extends Component {
     }
   }
 
-  toggleNew = event => {
+  toggleForm = event => {
     event.preventDefault()
 
     this.setState({ newMode: !this.state.newMode })
@@ -152,18 +159,14 @@ class Directory extends Component {
   render() {
     return (
       <div>
-        <Nav toggleNew={this.toggleNew} newMode={this.newMode} />
+        <Nav toggleForm={this.toggleForm} newMode={this.state.newMode} />
         <div>
-          {!this.state.newMode ? (
-            <div>
-              <br />
-            </div>
-          ) : (
+          <br />
+          {this.state.newMode && (
             <Form
-              text={this.state.text}
               onChange={this.handleChange}
               addItem={this.addItem}
-              toggleNew={this.toggleNew}
+              toggleForm={this.toggleForm}
             />
           )}
         </div>
